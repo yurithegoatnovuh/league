@@ -137,4 +137,4 @@ hookfunction(collectgarbage,gcinfo)
 -- not mine
 loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/Bypasses.lua"))()
 
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/yurithegoatnovuh/ui/main/gui"))()
+loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/yurithegoatnovuh/valorant/main/main"))()
