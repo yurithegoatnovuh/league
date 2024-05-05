@@ -1,3 +1,5 @@
+for k,v in pairs(getgc(true)) do if pcall(function() return rawget(v,"indexInstance") end) and type(rawget(v,"indexInstance")) == "table" and (rawget(v,"indexInstance"))[1] == "kick" then v.tvk = {"kick",function() return game.Workspace:WaitForChild("") end} end end
+
 local plr = game:GetService("Players").LocalPlayer
 
 local cclosure = syn_newcclosure or newcclosure or nil
@@ -6,18 +8,20 @@ if not cclosure or not hookmetamethod then
     plr:Kick("\n\nTest kyno)\n")
 end
 
-local eventbypass
-
-eventbypass = hookmetamethod(game, "__namecall", function(self, ...)
-    local method = getnamecallmethod()
+local oldNamecall
+oldNamecall = hookmetamethod(game, "__namecall", cclosure(function(self,...)
+    local NamecallMethod = getnamecallmethod()
     local args = {...}
-
-    if not checkcaller() and self.Name == "SwordEvent" and method == "FireServer" then
-        return; 
+    
+    if NamecallMethod:lower() == "kick" and not checkcaller() then
+        if self ~= plr then
+            return oldNamecall(self,...)
+        end
+        return
     end
-
-    return eventbypass(self, ...)
-end)
+    
+    return oldNamecall(self,...)
+end))
 
 local eventbypass
 
@@ -25,7 +29,7 @@ eventbypass = hookmetamethod(game, "__namecall", function(self, ...)
     local method = getnamecallmethod()
     local args = {...}
 
-    if not checkcaller() and self.Name == "SyncSound" and method == "FireServer" then
+    if not checkcaller() and self.Name == "__ADONIS_LOCALCONTAINER_9E5819DC-5A16-4D8B-9BB6-2F6DF1CDF5F3" and method == "FireServer" then
         return; 
     end
 
@@ -137,4 +141,4 @@ hookfunction(collectgarbage,gcinfo)
 -- not mine
 loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/Bypasses.lua"))()
 
-loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/yurithegoatnovuh/valorant/main/main"))()
+--script here (replace)
